@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Computing Quiz - ติวสอบคลาวด์คอมพิวติ้ง</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+    }
+    .choice-card {
+      transition: all 0.2s ease-in-out;
+    }
+    .choice-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg text-white leading-tight">Cloud Computing Quiz</h1>
+          <p class="text-xs text-slate-400">ชุดเก็งข้อสอบ 20 ข้อ สำหรับทบทวนก่อนสอบ</p>
+        </div>
+      </div>
+      <div id="badge-counter" class="bg-indigo-950 text-indigo-300 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-700/50">
+        ข้อ <span id="current-q-num">1</span>/20
+      </div>
+    </div>
+    <!-- Progress Bar -->
+    <div class="w-full bg-slate-800 h-1.5 overflow-hidden">
+      <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-full w-0 transition-all duration-300"></div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-3xl w-full mx-auto px-4 py-6 flex-grow flex flex-col justify-center">
+
+    <!-- Start View -->
+    <div id="view-start" class="text-center py-8 space-y-6">
+      <div class="inline-block p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-2">
+        <span class="text-5xl">⚡</span>
+      </div>
+      <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-cyan-400">
+        พร้อมลุยข้อสอบ Cloud แล้วหรือยัง?
+      </h2>
+      <p class="text-slate-300 max-w-md mx-auto text-sm leading-relaxed">
+        รวบรวมข้อสอบ 20 ข้อสำคัญ ครอบคลุมเนื้อหา:
+        <span class="text-indigo-300 font-medium block mt-2">
+          Cloud Basics • Private Cloud • Public Cloud • Virtualization • Docker
+        </span>
+      </p>
+      
+      <div class="bg-slate-800/60 border border-slate-700/70 rounded-2xl p-5 max-w-md mx-auto text-left space-y-2 text-sm text-slate-300">
+        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
+          <span>🎯 กติกาการฝึกทำ:</span>
+        </div>
+        <p>• คลิกตอบข้อที่คิดว่าถูกต้อง</p>
+        <p>• เฉลยทันทีข้อต่อข้อ พร้อมคำอธิบายจุดจำ</p>
+        <p>• สรุปผลคะแนนตอนท้ายให้แชร์อวดเพื่อนได้</p>
+      </div>
+
+      <div class="pt-4">
+        <button id="btn-start" class="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 font-bold rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 transition-transform text-white text-lg">
+          เริ่มทำข้อสอบเลย 🚀
+        </button>
+      </div>
+    </div>
+
+    <!-- Quiz View -->
+    <div id="view-quiz" class="hidden space-y-6">
+      <!-- Question Header -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs text-slate-400">
+          <span id="question-category" class="bg-slate-800 text-cyan-300 px-2.5 py-1 rounded-md font-medium border border-slate-700">หมวดหมู่</span>
+          <span id="score-counter" class="font-semibold text-slate-300">คะแนน: 0</span>
+        </div>
+        <h3 id="question-title" class="text-xl md:text-2xl font-bold text-white leading-snug">
+          คำถามจะแสดงที่นี่
+        </h3>
+      </div>
+
+      <!-- Choices List -->
+      <div id="choices-container" class="space-y-3 pt-2">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Explanation Box -->
+      <div id="explanation-box" class="hidden p-4 rounded-xl border border-slate-700 bg-slate-800/80 space-y-2 animate-fade-in">
+        <div class="flex items-center space-x-2 font-bold text-sm" id="explanation-title">
+          <span>💡 คำอธิบายเฉลย:</span>
+        </div>
+        <p id="explanation-text" class="text-slate-300 text-sm leading-relaxed"></p>
+        <div class="pt-3 flex justify-end">
+          <button id="btn-next" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-lg text-white text-sm shadow-md transition-colors flex items-center space-x-2">
+            <span>ข้อถัดไป</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result View -->
+    <div id="view-result" class="hidden text-center py-8 space-y-6">
+      <div class="inline-block p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-1">
+        <span id="result-emoji" class="text-6xl">🏆</span>
+      </div>
+      <h2 class="text-3xl font-extrabold text-white">ผลคะแนนของคุณ</h2>
+      
+      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 max-w-sm mx-auto shadow-xl">
+        <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-300" id="final-score">
+          20 / 20
+        </div>
+        <p id="final-percent" class="text-slate-400 text-sm mt-1">100%</p>
+        <div id="final-message" class="mt-4 text-sm font-semibold text-emerald-400 bg-emerald-950/50 py-2 px-3 rounded-lg border border-emerald-800">
+          ยอดเยี่ยมมาก! สอบผ่านฉลุยแน่นอน 💯
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+        <button id="btn-restart" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-white text-sm shadow-lg transition-transform active:scale-95">
+          🔄 ทำข้อสอบใหม่อีกรอบ
+        </button>
+        <button id="btn-share" class="w-full sm:w-auto px-6 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 font-semibold rounded-xl text-slate-200 text-sm shadow transition-colors">
+          📋 คัดลอกลิงก์ส่งให้เพื่อน
+        </button>
+      </div>
+      <p id="copy-toast" class="hidden text-xs text-emerald-400 font-medium">✓ คัดลอกลิงก์เรียบร้อยแล้ว!</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+    <p>Cloud Computing Final Exam Prep • พัฒนาเพื่อการทบทวนความรู้</p>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "1. โมเดลการให้บริการคลาวด์แบบใดที่ผู้ใช้สามารถเข้าใช้งานโปรแกรมผ่านเว็บเบราว์เซอร์ได้ทันที โดยไม่ต้องติดตั้งหรือดูแลระบบปฏิบัติการ?",
+        choices: [
+          "IaaS (Infrastructure as a Service)",
+          "PaaS (Platform as a Service)",
+          "SaaS (Software as a Service)",
+          "DaaS (Data as a Service)"
+        ],
+        answer: 2,
+        explanation: "SaaS คือซอฟต์แวร์สำเร็จรูปพร้อมใช้งานผ่านอินเทอร์เน็ต เช่น Google Docs, Gmail, Microsoft 365 ผู้ใช้ไม่ต้องบริหารจัดการหรือติดตั้งอะไรเองเลย"
+      },
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "2. หากต้องการพัฒนาเว็บแอปพลิเคชันโดยเน้นการเขียนโค้ดและดีพลอย แต่ไม่อยากจัดการ OS, Patching หรือ Server ควรเลือกบริการโมเดลใด?",
+        choices: [
+          "IaaS",
+          "PaaS",
+          "SaaS",
+          "On-Premise"
+        ],
+        answer: 1,
+        explanation: "PaaS (Platform as a Service) จัดเตรียม Environment และ Runtime สำหรับนักพัฒนาซอฟต์แวร์ ทำให้เน้นเขียนโค้ดได้โดยไม่ต้องกังวลเรื่องการตั้งค่า Server"
+      },
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "3. ในโมเดล IaaS (Infrastructure as a Service) ผู้ใช้งานมีหน้าที่รับผิดชอบในส่วนใดมากที่สุด?",
+        choices: [
+          "ระบบไฟฟ้าและศูนย์ข้อมูล (Data Center)",
+          "ระบบระบายความร้อนและฮาร์ดแวร์แม่ข่าย",
+          "ระบบปฏิบัติการ (OS), Middleware, แอปพลิเคชัน และข้อมูล",
+          "การซ่อมแซมฮาร์ดดิสก์ของเครื่อง Server ทางกายภาพ"
+        ],
+        answer: 2,
+        explanation: "IaaS ผู้ให้บริการจะดูแลเฉพาะฮาร์ดแวร์และ Virtualization ส่วนผู้ใช้ต้องติดตั้งและดูแล OS, Middleware, Runtime, และ App เองทั้งหมด"
+      },
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "4. ข้อใดคือ 5 คุณลักษณะสำคัญ (Essential Characteristics) ของ Cloud Computing ตามนิยามของ NIST?",
+        choices: [
+          "On-demand self-service, Broad network access, Resource pooling, Rapid elasticity, Measured service",
+          "High cost, Single server, Broadband locked, Manual elasticity, Fixed service",
+          "Static capacity, Local network only, Single-tenant, Unlimited free storage, No metering",
+          "Closed source, Hardware bound, Private only, No virtualization, Manual maintenance"
+        ],
+        answer: 0,
+        explanation: "NIST ระบุ 5 คุณลักษณะสำคัญ ได้แก่: เรียกใช้ได้เองตามต้องการ, เข้าถึงได้กว้างขวางผ่านเน็ต, รวมทรัพยากร, ยืดหยุ่นขยายได้เร็ว, คิดเงินตามใช้งานจริง"
+      },
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "5. บริการใดต่อไปนี้จัดอยู่ในกลุ่ม SaaS (Software as a Service) ในชีวิตประจำวัน?",
+        choices: [
+          "Amazon EC2",
+          "Google Docs และ Gmail",
+          "VMware ESXi",
+          "OpenStack Nova"
+        ],
+        answer: 1,
+        explanation: "Google Docs และ Gmail เป็นแอปพลิเคชันที่พร้อมใช้งานทันทีผ่านเบราว์เซอร์ จึงจัดเป็น SaaS"
+      },
+      {
+        category: "Unit 2: Private Cloud",
+        question: "6. รูปแบบการติดตั้งคลาวด์แบบใดที่ระบบและทรัพยากรทั้งหมดถูกสร้างและใช้งานอยู่ภายในองค์กรเดียว เพื่อการควบคุมความปลอดภัยสูงสุด?",
+        choices: [
+          "Public Cloud",
+          "Private Cloud",
+          "Community Cloud",
+          "Multi-tenant Cloud"
+        ],
+        answer: 1,
+        explanation: "Private Cloud เป็นระบบคลาวด์ที่ใช้งานเฉพาะองค์กรเดียว (Single-tenant) ควบคุมความปลอดภัยและนโยบายข้อมูลได้เต็มที่"
+      },
+      {
+        category: "Unit 2: Private Cloud",
+        question: "7. แพลตฟอร์ม Open Source ยอดนิยมสำหรับสร้างและบริหารจัดการ Infrastructure ของ Private Cloud คืออะไร?",
+        choices: [
+          "WordPress",
+          "OpenStack",
+          "Android",
+          "Node.js"
+        ],
+        answer: 1,
+        explanation: "OpenStack เป็นซอฟต์แวร์ Open Source ชั้นนำระดับโลกที่ใช้สร้าง Private Cloud ในศูนย์ข้อมูลขององค์กร"
+      },
+      {
+        category: "Unit 2: Private Cloud",
+        question: "8. คอมโพเนนต์หลักของ OpenStack ที่ทำหน้าที่ควบคุมและจัดสรรเครื่องคอมพิวเตอร์เสมือน (Compute Service) มีชื่อว่าอะไร?",
+        choices: [
+          "Nova",
+          "Swift",
+          "Neutron",
+          "Keystone"
+        ],
+        answer: 0,
+        explanation: "Nova คือคอมโพเนนต์หลักของ OpenStack ที่ดูแลเรื่อง Compute (สร้างและบริหาร Virtual Machines)"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "9. การเปลี่ยนมาใช้งาน Public Cloud ช่วยเปลี่ยนโครงสร้างงบประมาณขององค์กรอย่างไร?",
+        choices: [
+          "เปลี่ยนจาก OpEx เป็น CapEx",
+          "เปลี่ยนจาก CapEx เป็น OpEx",
+          "เพิ่ม CapEx เพื่อขยาย Data Center",
+          "ไม่ส่งผลต่อรูปแบบการคิดงบประมาณ"
+        ],
+        answer: 1,
+        explanation: "ลดการลงทุนซื้อเซิร์ฟเวอร์ก้อนโตล่วงหน้า (CapEx - Capital Expenditure) แล้วเปลี่ยนเป็นจ่ายตามการใช้งานจริงเป็นรอบบิล (OpEx - Operational Expenditure)"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "10. ตามโมเดล Shared Responsibility บน Public Cloud สิ่งใดที่ 'ผู้ให้บริการคลาวด์ (Cloud Provider)' ต้องรับผิดชอบ?",
+        choices: [
+          "การตั้งค่ารหัสผ่านและสิทธิ์การเข้าถึงของผู้ใช้ (IAM)",
+          "การรักษาความปลอดภัยของศูนย์ข้อมูลกายภาพและฮาร์ดแวร์ (Security OF the Cloud)",
+          "การเขียนโปรแกรมและการแก้บั๊กในโค้ดของลูกค้า",
+          "การเข้ารหัสไฟล์ข้อมูลของลูกค้าก่อนอัปโหลด"
+        ],
+        answer: 1,
+        explanation: "Cloud Provider มีหน้าที่รับผิดชอบ Security OF the Cloud (โครงสร้างพื้นฐานกายภาพ, Data Center, เครือข่ายหลัก)"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "11. ข้อใดต่อไปนี้คือผู้ให้บริการ Public Cloud รายใหญ่ (Top Hyperscalers) ของโลก?",
+        choices: [
+          "AWS, Microsoft Azure, Google Cloud (GCP)",
+          "Facebook, TikTok, Instagram",
+          "Ubuntu, Fedora, CentOS",
+          "Oracle Database, MySQL, PostgreSQL"
+        ],
+        answer: 0,
+        explanation: "AWS, Microsoft Azure และ Google Cloud คือ 3 ผู้ให้บริการ Public Cloud รายใหญ่ที่สุดของโลก"
+      },
+      {
+        category: "Unit 4: Virtualization",
+        question: "12. ซอฟต์แวร์หรือเฟิร์มแวร์ที่ทำหน้าที่เป็นตัวกลางในการจำลองฮาร์ดแวร์และรัน Virtual Machine เรียกว่าอะไร?",
+        choices: [
+          "Hypervisor (Virtual Machine Monitor)",
+          "Container Engine",
+          "BIOS / UEFI",
+          "Compiler"
+        ],
+        answer: 0,
+        explanation: "Hypervisor หรือ VMM เป็นเลเยอร์ที่คอยจำลองฮาร์ดแวร์และควบคุมการทำงานของ Virtual Machine ต่างๆ"
+      },
+      {
+        category: "Unit 4: Virtualization",
+        question: "13. Hypervisor ประเภท Type 1 (Bare-Metal Hypervisor) มีลักษณะการทำงานที่เด่นชัดคือข้อใด?",
+        choices: [
+          "ติดตั้งและรันอยู่บน Host OS ทั่วไปเช่น Windows 11",
+          "ติดตั้งและทำงานลงบนฮาร์ดแวร์ของเครื่องเซิร์ฟเวอร์โดยตรงโดยไม่ต้องมี Host OS",
+          "ทำงานผ่านเว็บเบราว์เซอร์เท่านั้น",
+          "ใช้งานได้เฉพาะบนสมาร์ตโฟน"
+        ],
+        answer: 1,
+        explanation: "Type 1 เช่น VMware ESXi, Proxmox VE, KVM ทำงานตรงบนฮาร์ดแวร์โดยตรง จึงมี Overhead ต่ำและมีประสิทธิภาพสูงสุด"
+      },
+      {
+        category: "Unit 4: Virtualization",
+        question: "14. โปรแกรมใดต่อไปนี้จัดเป็นตัวอย่างของ Type 2 Hypervisor (Hosted Hypervisor)?",
+        choices: [
+          "VMware Workstation และ Oracle VirtualBox",
+          "VMware ESXi",
+          "Microsoft Hyper-V Server",
+          "Xen Project"
+        ],
+        answer: 0,
+        explanation: "VMware Workstation และ VirtualBox ต้องติดตั้งลงบนระบบปฏิบัติการ (Host OS) ทั่วไป จึงจัดเป็น Type 2 Hypervisor"
+      },
+      {
+        category: "Unit 4: Virtualization",
+        question: "15. ความแตกต่างสำคัญที่สุดระหว่าง Virtual Machine (VM) กับ Container คือข้อใด?",
+        choices: [
+          "VM ทำงานเร็วกว่า Container เสมอ",
+          "VM มี Guest OS แยกสมบูรณ์ในตัวเอง ส่วน Container แชร์ Kernel ของระบบปฏิบัติการโฮสต์",
+          "Container กินพื้นที่เก็บข้อมูลมากกว่า VM เสมอ",
+          "Container ไม่สามารถรันแอปพลิเคชันได้"
+        ],
+        answer: 1,
+        explanation: "Container เป็นการจำลองระดับ OS-level (แชร์ Kernel ร่วมกัน) จึงมีขนาดเบาและบูตเร็วกว่า VM ที่ต้องมี Guest OS ตัวเต็ม"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "16. คำสั่งใดใน Docker ใช้สำหรับสร้าง (Create) และสั่งเริ่มต้น (Start) Container ในขั้นตอนเดียว?",
+        choices: [
+          "docker build",
+          "docker run",
+          "docker create",
+          "docker exec"
+        ],
+        answer: 1,
+        explanation: "docker run จะทำหน้าที่ดึง Image (หากยังไม่มี), สร้าง Container ใหม่ และเริ่มรันแอปพลิเคชันทันที"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "17. ไฟล์ข้อความ (Text file) ที่รวบรวมชุดคำสั่งทีละบรรทัดสำหรับใช้ 'สร้าง Docker Image' เรียกว่าอะไร?",
+        choices: [
+          "Dockerfile",
+          "Docker Container",
+          "docker-compose.yml",
+          "Imagefile"
+        ],
+        answer: 0,
+        explanation: "Dockerfile คือไฟล์สคริปต์คำสั่ง (เช่น FROM, RUN, COPY, CMD) ที่ใช้เป็นพิมพ์เขียวในการสั่ง docker build เพื่อสร้าง Image"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "18. คำสั่งใดใช้สำหรับตรวจสอบรายการ Container ทั้งหมด (ทั้งที่กำลังรันอยู่และที่หยุดทำงานไปแล้ว)?",
+        choices: [
+          "docker ps",
+          "docker ps -a",
+          "docker images",
+          "docker list"
+        ],
+        answer: 1,
+        explanation: "คำสั่ง docker ps จะแสดงเฉพาะตัวที่รันอยู่ หากต้องการดูทั้งหมด (All) ต้องระบุพารามิเตอร์ -a"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "19. คำสั่งใดใช้สำหรับ 'ลบ Docker Image' ออกจากเครื่อง?",
+        choices: [
+          "docker rm",
+          "docker rmi",
+          "docker erase",
+          "docker drop"
+        ],
+        answer: 1,
+        explanation: "docker rmi (Remove Image) ใช้สำหรับลบ Image ส่วน docker rm ใช้สำหรับลบ Container"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "20. แหล่งจัดเก็บและแบ่งปัน Docker Image สาธารณะที่ใหญ่ที่สุดคือที่ใด?",
+        choices: [
+          "Docker Hub",
+          "GitHub Pages",
+          "Google Drive",
+          "NPM Registry"
+        ],
+        answer: 0,
+        explanation: "Docker Hub เป็น Official Public Registry ที่ใช้ค้นหา ดาวน์โหลด (pull) และแชร์ Docker Image ที่ใหญ่ที่สุดในโลก"
+      }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let answered = false;
+
+    const viewStart = document.getElementById('view-start');
+    const viewQuiz = document.getElementById('view-quiz');
+    const viewResult = document.getElementById('view-result');
+
+    const btnStart = document.getElementById('btn-start');
+    const btnNext = document.getElementById('btn-next');
+    const btnRestart = document.getElementById('btn-restart');
+    const btnShare = document.getElementById('btn-share');
+    const copyToast = document.getElementById('copy-toast');
+
+    const qNumEl = document.getElementById('current-q-num');
+    const progressBar = document.getElementById('progress-bar');
+    const qCategory = document.getElementById('question-category');
+    const scoreCounter = document.getElementById('score-counter');
+    const qTitle = document.getElementById('question-title');
+    const choicesContainer = document.getElementById('choices-container');
+
+    const explanationBox = document.getElementById('explanation-box');
+    const explanationTitle = document.getElementById('explanation-title');
+    const explanationText = document.getElementById('explanation-text');
+
+    const finalScore = document.getElementById('final-score');
+    const finalPercent = document.getElementById('final-percent');
+    const finalMessage = document.getElementById('final-message');
+    const resultEmoji = document.getElementById('result-emoji');
+
+    btnStart.addEventListener('click', () => {
+      viewStart.classList.add('hidden');
+      viewQuiz.classList.remove('hidden');
+      currentIdx = 0;
+      score = 0;
+      loadQuestion();
+    });
+
+    btnRestart.addEventListener('click', () => {
+      viewResult.classList.add('hidden');
+      viewQuiz.classList.remove('hidden');
+      currentIdx = 0;
+      score = 0;
+      loadQuestion();
+    });
+
+    btnNext.addEventListener('click', () => {
+      currentIdx++;
+      if (currentIdx < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    btnShare.addEventListener('click', () => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href);
+      }
+      copyToast.classList.remove('hidden');
+      setTimeout(() => copyToast.classList.add('hidden'), 3000);
+    });
+
+    function loadQuestion() {
+      answered = false;
+      explanationBox.classList.add('hidden');
+      
+      const q = questions[currentIdx];
+      qNumEl.textContent = currentIdx + 1;
+      const progressPercent = ((currentIdx) / questions.length) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      qCategory.textContent = q.category;
+      scoreCounter.textContent = `คะแนน: ${score}`;
+      qTitle.textContent = q.question;
+
+      choicesContainer.innerHTML = '';
+      const letters = ['ก', 'ข', 'ค', 'ง'];
+
+      q.choices.forEach((choice, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "choice-card w-full text-left p-4 rounded-xl bg-slate-800/90 border border-slate-700/80 hover:bg-slate-750 hover:border-indigo-500/50 flex items-center space-x-3 text-slate-200 cursor-pointer shadow-sm";
+        btn.innerHTML = `
+          <div class="w-8 h-8 rounded-lg bg-slate-700/80 text-slate-300 font-bold flex items-center justify-center flex-shrink-0 text-sm border border-slate-600">
+            ${letters[idx]}
+          </div>
+          <span class="text-sm md:text-base font-normal flex-grow">${choice}</span>
+        `;
+        btn.addEventListener('click', () => handleAnswer(idx, btn));
+        choicesContainer.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selectedIdx, clickedBtn) {
+      if (answered) return;
+      answered = true;
+
+      const q = questions[currentIdx];
+      const isCorrect = selectedIdx === q.answer;
+      const allButtons = choicesContainer.querySelectorAll('.choice-card');
+
+      allButtons.forEach((b, idx) => {
+        b.classList.remove('hover:bg-slate-750', 'hover:border-indigo-500/50', 'cursor-pointer');
+        b.classList.add('cursor-default');
+        
+        if (idx === q.answer) {
+          // Highlight correct answer in green
+          b.classList.remove('bg-slate-800/90', 'border-slate-700/80');
+          b.classList.add('bg-emerald-950/80', 'border-emerald-500', 'text-emerald-200');
+          const badge = b.querySelector('div');
+          badge.className = "w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center flex-shrink-0 text-sm";
+          badge.textContent = "✓";
+        } else if (idx === selectedIdx && !isCorrect) {
+          // Highlight wrong picked answer in red
+          b.classList.remove('bg-slate-800/90', 'border-slate-700/80');
+          b.classList.add('bg-rose-950/80', 'border-rose-500', 'text-rose-200');
+          const badge = b.querySelector('div');
+          badge.className = "w-8 h-8 rounded-lg bg-rose-600 text-white font-bold flex items-center justify-center flex-shrink-0 text-sm";
+          badge.textContent = "✕";
+        } else {
+          b.classList.add('opacity-40');
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        scoreCounter.textContent = `คะแนน: ${score}`;
+        explanationTitle.className = "flex items-center space-x-2 font-bold text-sm text-emerald-400";
+        explanationTitle.innerHTML = `<span>🎉 ถูกต้อง! เก่งมาก</span>`;
+      } else {
+        explanationTitle.className = "flex items-center space-x-2 font-bold text-sm text-rose-400";
+        explanationTitle.innerHTML = `<span>❌ ยังไม่ถูก (คำตอบที่ถูกคือข้อ ${['ก', 'ข', 'ค', 'ง'][q.answer]})</span>`;
+      }
+
+      explanationText.textContent = q.explanation;
+      explanationBox.classList.remove('hidden');
+
+      if (currentIdx === questions.length - 1) {
+        btnNext.innerHTML = `<span>ดูผลสรุปคะแนน</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+      } else {
+        btnNext.innerHTML = `<span>ข้อถัดไป</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>`;
+      }
+    }
+
+    function showResult() {
+      viewQuiz.classList.add('hidden');
+      viewResult.classList.remove('hidden');
+      progressBar.style.width = '100%';
+
+      finalScore.textContent = `${score} / ${questions.length}`;
+      const percent = Math.round((score / questions.length) * 100);
+      finalPercent.textContent = `${percent}%`;
+
+      if (percent >= 80) {
+        resultEmoji.textContent = "🏆";
+        finalMessage.className = "mt-4 text-sm font-semibold text-emerald-400 bg-emerald-950/50 py-2.5 px-3 rounded-lg border border-emerald-800";
+        finalMessage.textContent = "สุดยอดมาก! เตรียมตัวพร้อมสอบเต็มร้อยแน่นอน 🌟";
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+      } else if (percent >= 50) {
+        resultEmoji.textContent = "👍";
+        finalMessage.className = "mt-4 text-sm font-semibold text-amber-300 bg-amber-950/50 py-2.5 px-3 rounded-lg border border-amber-800";
+        finalMessage.textContent = "ผ่านเกณฑ์แล้ว! ลองทบทวนข้อที่ผิดอีกรอบเพื่อความชัวร์ 📚";
+      } else {
+        resultEmoji.textContent = "💪";
+        finalMessage.className = "mt-4 text-sm font-semibold text-rose-300 bg-rose-950/50 py-2.5 px-3 rounded-lg border border-rose-800";
+        finalMessage.textContent = "สู้ๆ ลองใหม่อีกรอบ จำจุดสำคัญแล้วทำใหม่ได้เลย!";
+      }
+    }
+  </script>
+</body>
+</html>
