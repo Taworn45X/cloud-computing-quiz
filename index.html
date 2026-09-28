@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud Computing Quiz - ติวสอบคลาวด์คอมพิวติ้ง</title>
+  <title>Cloud Computing Exam Prep - คลังข้อสอบ 40 ข้อพร้อมเฉลยและเหตุผล</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,8 @@
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
   <!-- Header -->
-  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/20">
           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,12 +33,19 @@
           </svg>
         </div>
         <div>
-          <h1 class="font-bold text-lg text-white leading-tight">Cloud Computing Quiz</h1>
-          <p class="text-xs text-slate-400">ชุดเก็งข้อสอบ 20 ข้อ สำหรับทบทวนก่อนสอบ</p>
+          <h1 class="font-bold text-base sm:text-lg text-white leading-tight">Cloud Computing Exam Prep</h1>
+          <p class="text-xs text-slate-400">คลังข้อสอบ 40 ข้อจัดเต็ม พร้อมเฉลยละเอียดและเหตุผล</p>
         </div>
       </div>
-      <div id="badge-counter" class="bg-indigo-950 text-indigo-300 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-700/50">
-        ข้อ <span id="current-q-num">1</span>/20
+      
+      <!-- Top Actions -->
+      <div class="flex items-center space-x-2">
+        <button id="nav-mode-study" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center space-x-1.5">
+          <span>📖 โหมดอ่านติว</span>
+        </button>
+        <div id="badge-counter" class="bg-indigo-950 text-indigo-300 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-700/50">
+          ข้อ <span id="current-q-num">1</span>/<span id="total-q-num">40</span>
+        </div>
       </div>
     </div>
     <!-- Progress Bar -->
@@ -51,32 +58,53 @@
   <main class="max-w-3xl w-full mx-auto px-4 py-6 flex-grow flex flex-col justify-center">
 
     <!-- Start View -->
-    <div id="view-start" class="text-center py-8 space-y-6">
-      <div class="inline-block p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-2">
+    <div id="view-start" class="text-center py-6 space-y-6">
+      <div class="inline-block p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-1">
         <span class="text-5xl">⚡</span>
       </div>
       <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-300 to-cyan-400">
-        พร้อมลุยข้อสอบ Cloud แล้วหรือยัง?
+        คลังข้อสอบ Cloud Computing 40 ข้อ
       </h2>
-      <p class="text-slate-300 max-w-md mx-auto text-sm leading-relaxed">
-        รวบรวมข้อสอบ 20 ข้อสำคัญ ครอบคลุมเนื้อหา:
+      <p class="text-slate-300 max-w-lg mx-auto text-sm leading-relaxed">
+        คัดสรรครบทุกหัวข้อที่ออกสอบจริงทั้ง 5 บทเรียน:
         <span class="text-indigo-300 font-medium block mt-2">
-          Cloud Basics • Private Cloud • Public Cloud • Virtualization • Docker
+          • บทที่ 1: Cloud Basics & Models (IaaS, PaaS, SaaS, NIST)<br>
+          • บทที่ 2: Private Cloud & OpenStack Architecture<br>
+          • บทที่ 3: Public Cloud & Shared Responsibility Model<br>
+          • บทที่ 4: Virtualization, Hypervisor & VM vs Container<br>
+          • บทที่ 5: Docker Architecture, Commands & Dockerfile
         </span>
       </p>
-      
-      <div class="bg-slate-800/60 border border-slate-700/70 rounded-2xl p-5 max-w-md mx-auto text-left space-y-2 text-sm text-slate-300">
-        <div class="flex items-center space-x-2 text-white font-semibold mb-2">
-          <span>🎯 กติกาการฝึกทำ:</span>
+
+      <!-- Options Box -->
+      <div class="bg-slate-800/60 border border-slate-700/70 rounded-2xl p-5 max-w-md mx-auto text-left space-y-3 text-sm text-slate-300">
+        <div class="font-semibold text-white flex items-center space-x-2">
+          <span>⚙️ เลือกรูปแบบการทำแบบทดสอบ:</span>
         </div>
-        <p>• คลิกตอบข้อที่คิดว่าถูกต้อง</p>
-        <p>• เฉลยทันทีข้อต่อข้อ พร้อมคำอธิบายจุดจำ</p>
-        <p>• สรุปผลคะแนนตอนท้ายให้แชร์อวดเพื่อนได้</p>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg hover:bg-slate-700/50">
+            <input type="radio" name="quiz-mode" value="all" checked class="text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="font-semibold text-white">ทำครบทั้งหมด 40 ข้อ</span>
+              <p class="text-xs text-slate-400">ลุยครบทุกบท แม่นยำที่สุดสำหรับเตรียมสอบ</p>
+            </div>
+          </label>
+          <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg hover:bg-slate-700/50">
+            <input type="radio" name="quiz-mode" value="random20" class="text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="font-semibold text-white">สุ่ม 20 ข้อ (เล่นเร็ว)</span>
+              <p class="text-xs text-slate-400">สุ่มข้อสอบ 20 ข้อจากคลัง 40 ข้อ สำหรับฝึกจำช่วงเวลาสั้นๆ</p>
+            </div>
+          </label>
+        </div>
       </div>
 
-      <div class="pt-4">
-        <button id="btn-start" class="px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 font-bold rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 transition-transform text-white text-lg">
-          เริ่มทำข้อสอบเลย 🚀
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button id="btn-start" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-indigo-500 to-cyan-500 hover:from-indigo-600 hover:to-cyan-600 font-bold rounded-xl shadow-lg shadow-indigo-500/25 active:scale-95 transition-transform text-white text-base">
+          🚀 เริ่มทำข้อสอบทันที
+        </button>
+        <button id="btn-open-study" class="w-full sm:w-auto px-6 py-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 font-semibold rounded-xl text-slate-200 text-base shadow transition-colors">
+          📖 โหมดอ่านสรุป (ไม่ต้องคลิกตอบ)
         </button>
       </div>
     </div>
@@ -89,7 +117,7 @@
           <span id="question-category" class="bg-slate-800 text-cyan-300 px-2.5 py-1 rounded-md font-medium border border-slate-700">หมวดหมู่</span>
           <span id="score-counter" class="font-semibold text-slate-300">คะแนน: 0</span>
         </div>
-        <h3 id="question-title" class="text-xl md:text-2xl font-bold text-white leading-snug">
+        <h3 id="question-title" class="text-lg md:text-xl font-bold text-white leading-snug">
           คำถามจะแสดงที่นี่
         </h3>
       </div>
@@ -100,12 +128,12 @@
       </div>
 
       <!-- Explanation Box -->
-      <div id="explanation-box" class="hidden p-4 rounded-xl border border-slate-700 bg-slate-800/80 space-y-2 animate-fade-in">
+      <div id="explanation-box" class="hidden p-4 rounded-xl border border-slate-700 bg-slate-800/90 space-y-3 animate-fade-in shadow-lg">
         <div class="flex items-center space-x-2 font-bold text-sm" id="explanation-title">
-          <span>💡 คำอธิบายเฉลย:</span>
+          <span>💡 ทำไมถึงตอบข้อนี้?</span>
         </div>
-        <p id="explanation-text" class="text-slate-300 text-sm leading-relaxed"></p>
-        <div class="pt-3 flex justify-end">
+        <div id="explanation-text" class="text-slate-200 text-sm leading-relaxed space-y-1"></div>
+        <div class="pt-2 flex justify-end">
           <button id="btn-next" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-lg text-white text-sm shadow-md transition-colors flex items-center space-x-2">
             <span>ข้อถัดไป</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
@@ -115,23 +143,23 @@
     </div>
 
     <!-- Result View -->
-    <div id="view-result" class="hidden text-center py-8 space-y-6">
+    <div id="view-result" class="hidden text-center py-6 space-y-6">
       <div class="inline-block p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-1">
         <span id="result-emoji" class="text-6xl">🏆</span>
       </div>
-      <h2 class="text-3xl font-extrabold text-white">ผลคะแนนของคุณ</h2>
+      <h2 class="text-3xl font-extrabold text-white">สรุปผลการทดสอบ</h2>
       
       <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 max-w-sm mx-auto shadow-xl">
         <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-300" id="final-score">
-          20 / 20
+          40 / 40
         </div>
         <p id="final-percent" class="text-slate-400 text-sm mt-1">100%</p>
-        <div id="final-message" class="mt-4 text-sm font-semibold text-emerald-400 bg-emerald-950/50 py-2 px-3 rounded-lg border border-emerald-800">
+        <div id="final-message" class="mt-4 text-sm font-semibold text-emerald-400 bg-emerald-950/50 py-2.5 px-3 rounded-lg border border-emerald-800">
           ยอดเยี่ยมมาก! สอบผ่านฉลุยแน่นอน 💯
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
         <button id="btn-restart" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-white text-sm shadow-lg transition-transform active:scale-95">
           🔄 ทำข้อสอบใหม่อีกรอบ
         </button>
@@ -142,18 +170,46 @@
       <p id="copy-toast" class="hidden text-xs text-emerald-400 font-medium">✓ คัดลอกลิงก์เรียบร้อยแล้ว!</p>
     </div>
 
+    <!-- Study Mode View (Read All Questions & Explanations) -->
+    <div id="view-study" class="hidden space-y-6 py-2">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div>
+          <h2 class="text-xl font-bold text-white">📖 โหมดอ่านติวสรุปครบ 40 ข้อ</h2>
+          <p class="text-xs text-slate-400">อ่านคำถาม เฉลย และเหตุผลได้เลยโดยไม่ต้องกดตอบ</p>
+        </div>
+        <button id="btn-back-to-quiz" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold rounded-lg text-white">
+          ← กลับหน้าทำข้อสอบ
+        </button>
+      </div>
+
+      <!-- Filter by category -->
+      <div class="flex flex-wrap gap-1.5" id="study-filters">
+        <button class="filter-btn active px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium" data-filter="all">ทั้งหมด (40)</button>
+        <button class="filter-btn px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium" data-filter="Unit 1">บทที่ 1 Basics</button>
+        <button class="filter-btn px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium" data-filter="Unit 2">บทที่ 2 Private Cloud</button>
+        <button class="filter-btn px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium" data-filter="Unit 3">บทที่ 3 Public Cloud</button>
+        <button class="filter-btn px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium" data-filter="Unit 4">บทที่ 4 Virtualization</button>
+        <button class="filter-btn px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium" data-filter="Unit 5">บทที่ 5 Docker</button>
+      </div>
+
+      <div id="study-list" class="space-y-4">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
   </main>
 
   <!-- Footer -->
   <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
-    <p>Cloud Computing Final Exam Prep • พัฒนาเพื่อการทบทวนความรู้</p>
+    <p>Cloud Computing Final Exam Prep • พัฒนาเพื่อการทบทวนความรู้ก่อนสอบ</p>
   </footer>
 
   <script>
-    const questions = [
+    const allQuestions = [
+      // UNIT 1: Introduction to Cloud Computing & Service Models
       {
         category: "Unit 1: Cloud Basics",
-        question: "1. โมเดลการให้บริการคลาวด์แบบใดที่ผู้ใช้สามารถเข้าใช้งานโปรแกรมผ่านเว็บเบราว์เซอร์ได้ทันที โดยไม่ต้องติดตั้งหรือดูแลระบบปฏิบัติการ?",
+        question: "1. โมเดลการให้บริการคลาวด์แบบใดที่ผู้ใช้สามารถเข้าใช้งานโปรแกรมผ่านเว็บเบราว์เซอร์ได้ทันที โดยไม่ต้องติดตั้งหรือดูแลระบบปฏิบัติการเลย?",
         choices: [
           "IaaS (Infrastructure as a Service)",
           "PaaS (Platform as a Service)",
@@ -161,11 +217,11 @@
           "DaaS (Data as a Service)"
         ],
         answer: 2,
-        explanation: "SaaS คือซอฟต์แวร์สำเร็จรูปพร้อมใช้งานผ่านอินเทอร์เน็ต เช่น Google Docs, Gmail, Microsoft 365 ผู้ใช้ไม่ต้องบริหารจัดการหรือติดตั้งอะไรเองเลย"
+        explanation: "<strong>ตอบ ค. SaaS</strong><br>• <strong>เหตุผล:</strong> SaaS (Software as a Service) คือบริการซอฟต์แวร์สำเร็จรูปที่พร้อมใช้งานผ่านเครือข่ายอินเทอร์เน็ตทันที เช่น Google Docs, Gmail, Microsoft 365, Canva โดยที่ผู้ใช้ปลายทางไม่ต้องรับผิดชอบการดูแลฮาร์ดแวร์, OS, หรือการติดตั้งอัปเดตใดๆ ทั้งสิ้น"
       },
       {
         category: "Unit 1: Cloud Basics",
-        question: "2. หากต้องการพัฒนาเว็บแอปพลิเคชันโดยเน้นการเขียนโค้ดและดีพลอย แต่ไม่อยากจัดการ OS, Patching หรือ Server ควรเลือกบริการโมเดลใด?",
+        question: "2. หากต้องการพัฒนาเว็บแอปพลิเคชันโดยเน้นการเขียนโค้ดและดีพลอย แต่ไม่อยากจัดการ OS, Web Server, หรือ Patching ควรเลือกบริการโมเดลใด?",
         choices: [
           "IaaS",
           "PaaS",
@@ -173,19 +229,19 @@
           "On-Premise"
         ],
         answer: 1,
-        explanation: "PaaS (Platform as a Service) จัดเตรียม Environment และ Runtime สำหรับนักพัฒนาซอฟต์แวร์ ทำให้เน้นเขียนโค้ดได้โดยไม่ต้องกังวลเรื่องการตั้งค่า Server"
+        explanation: "<strong>ตอบ ข. PaaS</strong><br>• <strong>เหตุผล:</strong> PaaS (Platform as a Service) จัดเตรียม Environment, Runtime, ฐานข้อมูล และ Web Server สำเร็จรูปไว้ให้แล้ว นักพัฒนาเพียงแค่นำ Source Code มา Deploy ขึ้นระบบ จึงเหมาะกับโปรแกรมเมอร์ที่ต้องการโฟกัสที่การเขียนโค้ดโดยไม่ต้องดูแลเซิร์ฟเวอร์"
       },
       {
         category: "Unit 1: Cloud Basics",
         question: "3. ในโมเดล IaaS (Infrastructure as a Service) ผู้ใช้งานมีหน้าที่รับผิดชอบในส่วนใดมากที่สุด?",
         choices: [
-          "ระบบไฟฟ้าและศูนย์ข้อมูล (Data Center)",
-          "ระบบระบายความร้อนและฮาร์ดแวร์แม่ข่าย",
+          "ระบบไฟฟ้าและศูนย์ข้อมูลทางกายภาพ",
+          "การซ่อมบำรุงฮาร์ดแวร์เซิร์ฟเวอร์และระบบทำความเย็น",
           "ระบบปฏิบัติการ (OS), Middleware, แอปพลิเคชัน และข้อมูล",
-          "การซ่อมแซมฮาร์ดดิสก์ของเครื่อง Server ทางกายภาพ"
+          "การเชื่อมต่อสายไฟเบอร์ออปติกของศูนย์ข้อมูล"
         ],
         answer: 2,
-        explanation: "IaaS ผู้ให้บริการจะดูแลเฉพาะฮาร์ดแวร์และ Virtualization ส่วนผู้ใช้ต้องติดตั้งและดูแล OS, Middleware, Runtime, และ App เองทั้งหมด"
+        explanation: "<strong>ตอบ ค. ระบบปฏิบัติการ (OS), Middleware, แอปพลิเคชัน และข้อมูล</strong><br>• <strong>เหตุผล:</strong> IaaS ผู้ให้บริการจะจัดหาเฉพาะโครงสร้างพื้นฐานระดับล่าง (Physical Servers, Hypervisor, Storage, Data Center) ส่วนผู้เช่าต้องติดตั้ง OS, คอนฟิก Firewall, ลงโปรแกรม และดูแลความปลอดภัยของข้อมูลเอง"
       },
       {
         category: "Unit 1: Cloud Basics",
@@ -197,7 +253,7 @@
           "Closed source, Hardware bound, Private only, No virtualization, Manual maintenance"
         ],
         answer: 0,
-        explanation: "NIST ระบุ 5 คุณลักษณะสำคัญ ได้แก่: เรียกใช้ได้เองตามต้องการ, เข้าถึงได้กว้างขวางผ่านเน็ต, รวมทรัพยากร, ยืดหยุ่นขยายได้เร็ว, คิดเงินตามใช้งานจริง"
+        explanation: "<strong>ตอบ ก.</strong><br>• <strong>เหตุผล (5 กฎเหล็ก NIST):</strong><br>1. <em>On-demand self-service:</em> ผู้ใช้เปิดใช้งานทรัพยากรได้เองทันทีไม่ต้องรอเจ้าหน้าที่<br>2. <em>Broad network access:</em> เข้าถึงผ่านเครือข่ายมาตรฐานจากทุกอุปกรณ์<br>3. <em>Resource pooling:</em> จัดสรรทรัพยากรรวมกันแบบ Multi-tenant<br>4. <em>Rapid elasticity:</em> ยืดหยุ่น ขยายหรือลดขนาดได้รวดเร็วตามต้องการ<br>5. <em>Measured service:</em> มีระบบวัดปริมาณการใช้งานและคิดค่าบริการตามที่ใช้จริง"
       },
       {
         category: "Unit 1: Cloud Basics",
@@ -209,35 +265,85 @@
           "OpenStack Nova"
         ],
         answer: 1,
-        explanation: "Google Docs และ Gmail เป็นแอปพลิเคชันที่พร้อมใช้งานทันทีผ่านเบราว์เซอร์ จึงจัดเป็น SaaS"
+        explanation: "<strong>ตอบ ข. Google Docs และ Gmail</strong><br>• <strong>เหตุผล:</strong> เป็นแอปพลิเคชันที่พร้อมใช้งานทันทีผ่านเบราว์เซอร์ ไม่ต้องติดตั้ง ไม่ต้องจัดการโครงสร้างพื้นฐานเบื้องหลัง ส่วน Amazon EC2 เป็น IaaS, VMware ESXi เป็น Hypervisor และ Nova เป็นโมดูลของ OpenStack"
       },
       {
+        category: "Unit 1: Cloud Basics",
+        question: "6. รูปแบบการผสมผสานระหว่าง Private Cloud ขององค์กร และ Public Cloud ภายนอกเข้าด้วยกัน เรียกว่าอะไร?",
+        choices: [
+          "Community Cloud",
+          "Hybrid Cloud",
+          "Distributed Cloud",
+          "Internal Cloud"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. Hybrid Cloud</strong><br>• <strong>เหตุผล:</strong> Hybrid Cloud คือการเชื่อมโยง Private Cloud (เก็บข้อมูลสำคัญ/ความลับสูง) เข้ากับ Public Cloud (ใช้ขยายขีดความสามารถเวลามีผู้ใช้พุ่งสูง หรือ Cloud Bursting) เพื่อให้ได้ประโยชน์ทั้งด้านความปลอดภัยและความยืดหยุ่น"
+      },
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "7. คุณสมบัติ Cloud Bursting บน Hybrid Cloud มีประโยชน์หลักเพื่ออะไร?",
+        choices: [
+          "หยุดระบบทั้งหมดเมื่อมีไวรัสโจมตี",
+          "ย้ายข้อมูลลับทั้งหมดไปทิ้งใน Public Cloud",
+          "ขยายขีดความสามารถการประมวลผลไปยัง Public Cloud ชั่วคราวเมื่อ Workload ของ Private Cloud พุ่งสูงเกินรองรับ",
+          "ลดขนาดของแบนด์วิดท์อินเทอร์เน็ตเพื่อประหยัดเงิน"
+        ],
+        answer: 2,
+        explanation: "<strong>ตอบ ค. ขยายไปยัง Public Cloud ชั่วคราว</strong><br>• <strong>เหตุผล:</strong> Cloud Bursting คือกลยุทธ์ที่ Private Cloud ขององค์กรจะ 'Burst' (ระเบิดขยาย) ออกไปดึงทรัพยากรบน Public Cloud มาร่วมประมวลผลเฉพาะตอนที่มีทราฟฟิกพุ่งสูง (เช่น ช่วงจัดโปรโมชัน 11.11) เมื่อทราฟฟิกลดลงก็คืนทรัพยากรเพื่อคุมต้นทุน"
+      },
+      {
+        category: "Unit 1: Cloud Basics",
+        question: "8. ข้อใดคือตัวอย่างของ Community Cloud (คลาวด์เฉพาะกลุ่ม)?",
+        choices: [
+          "คลาวด์ที่สร้างขึ้นสำหรับบริษัทเดียวใช้งาน",
+          "คลาวด์ที่เปิดให้ประชาชนทั่วไปทั่วโลกสมัครใช้งานได้อิสระ",
+          "คลาวด์ที่สร้างขึ้นเพื่อใช้งานร่วมกันเฉพาะกลุ่มองค์กรที่มีพันธกิจหรือข้อกำหนดความปลอดภัยร่วมกัน เช่น กลุ่มธนาคารพาณิชย์ หรือกลุ่มโรงพยาบาล",
+          "คลาวด์ที่ติดตั้งบนเครื่องคอมพิวเตอร์ส่วนบุคคลที่บ้าน"
+        ],
+        answer: 2,
+        explanation: "<strong>ตอบ ค.</strong><br>• <strong>เหตุผล:</strong> Community Cloud ออกแบบมาเพื่อกลุ่มองค์กรที่มีข้อกำหนด นโยบาย หรือข้อบังคับทางกฎหมายร่วมกัน (Shared Mission & Compliance) เพื่อแชร์ต้นทุนและมาตรฐานความปลอดภัยร่วมกัน"
+      },
+
+      // UNIT 2: Private Cloud & OpenStack
+      {
         category: "Unit 2: Private Cloud",
-        question: "6. รูปแบบการติดตั้งคลาวด์แบบใดที่ระบบและทรัพยากรทั้งหมดถูกสร้างและใช้งานอยู่ภายในองค์กรเดียว เพื่อการควบคุมความปลอดภัยสูงสุด?",
+        question: "9. รูปแบบการติดตั้งคลาวด์แบบใดที่ระบบและทรัพยากรทั้งหมดถูกสร้างและใช้งานอยู่ภายในองค์กรเดียว เพื่อการควบคุมความปลอดภัยและนโยบายสูงสุด?",
         choices: [
           "Public Cloud",
           "Private Cloud",
           "Community Cloud",
-          "Multi-tenant Cloud"
+          "Global Cloud"
         ],
         answer: 1,
-        explanation: "Private Cloud เป็นระบบคลาวด์ที่ใช้งานเฉพาะองค์กรเดียว (Single-tenant) ควบคุมความปลอดภัยและนโยบายข้อมูลได้เต็มที่"
+        explanation: "<strong>ตอบ ข. Private Cloud</strong><br>• <strong>เหตุผล:</strong> Private Cloud เป็นโมเดลที่ทรัพยากรทั้งหมดถูกจัดสรรสำหรับองค์กรเดียว (Single-Tenant) เหมาะกับองค์กรที่ต้องรักษาความลับของข้อมูล เช่น สถาบันการเงิน หรือหน่วยงานความมั่นคง"
       },
       {
         category: "Unit 2: Private Cloud",
-        question: "7. แพลตฟอร์ม Open Source ยอดนิยมสำหรับสร้างและบริหารจัดการ Infrastructure ของ Private Cloud คืออะไร?",
+        question: "10. ข้อใดคือ 'ข้อจำกัดสำคัญ' ของการติดตั้งระบบ Private Cloud ภายในองค์กรเอง?",
+        choices: [
+          "ไม่สามารถกำหนดสิทธิ์ผู้ใช้ได้",
+          "ต้องใช้เงินลงทุนเริ่มต้นสูงมาก (CapEx) และต้องมีบุคลากรผู้เชี่ยวชาญดูแลระบบเองตลอดเวลา",
+          "ไม่สามารถใช้งานระบบเครือข่ายภายในได้",
+          "ความปลอดภัยต่ำกว่า Public Cloud เสมอ"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. ต้องใช้เงินลงทุนเริ่มต้นสูงมาก (CapEx)</strong><br>• <strong>เหตุผล:</strong> การทำ Private Cloud องค์กรต้องลงทุนซื้อเซิร์ฟเวอร์ราคาแพง แร็ค อุปกรณ์เน็ตเวิร์ก ลิขสิทธิ์ซอฟต์แวร์ และต้องมีทีมวิศวกรดูแล Data Center ตลอด 24/7 ซึ่งกินงบประมาณมหาศาล"
+      },
+      {
+        category: "Unit 2: Private Cloud",
+        question: "11. แพลตฟอร์ม Open Source ชั้นนำระดับโลกที่นิยมนำมาสร้าง Infrastructure สำหรับ Private Cloud คืออะไร?",
         choices: [
           "WordPress",
           "OpenStack",
-          "Android",
-          "Node.js"
+          "Android OS",
+          "Apache HTTP Server"
         ],
         answer: 1,
-        explanation: "OpenStack เป็นซอฟต์แวร์ Open Source ชั้นนำระดับโลกที่ใช้สร้าง Private Cloud ในศูนย์ข้อมูลขององค์กร"
+        explanation: "<strong>ตอบ ข. OpenStack</strong><br>• <strong>เหตุผล:</strong> OpenStack คือ Cloud Operating System แบบ Open Source ที่ทรงพลังที่สุด ประกอบด้วยชุดโมดูลสำหรับควบคุมการประมวลผล สตอเรจ และเครือข่ายในระดับ Data Center"
       },
       {
         category: "Unit 2: Private Cloud",
-        question: "8. คอมโพเนนต์หลักของ OpenStack ที่ทำหน้าที่ควบคุมและจัดสรรเครื่องคอมพิวเตอร์เสมือน (Compute Service) มีชื่อว่าอะไร?",
+        question: "12. ในระบบ OpenStack คอมโพเนนต์ที่ทำหน้าที่ควบคุมและบริหารจัดการ Virtual Machine (Compute Service) มีชื่อว่าอะไร?",
         choices: [
           "Nova",
           "Swift",
@@ -245,169 +351,374 @@
           "Keystone"
         ],
         answer: 0,
-        explanation: "Nova คือคอมโพเนนต์หลักของ OpenStack ที่ดูแลเรื่อง Compute (สร้างและบริหาร Virtual Machines)"
+        explanation: "<strong>ตอบ ก. Nova</strong><br>• <strong>เหตุผล:</strong> Nova คือหัวใจหลักด้าน Compute ของ OpenStack ทำหน้าที่สั่งสร้าง ลบ และจัดการอายุการใช้งานของ Virtual Machine บน Hypervisor ต่างๆ"
       },
       {
-        category: "Unit 3: Public Cloud",
-        question: "9. การเปลี่ยนมาใช้งาน Public Cloud ช่วยเปลี่ยนโครงสร้างงบประมาณขององค์กรอย่างไร?",
+        category: "Unit 2: Private Cloud",
+        question: "13. ใน OpenStack หากต้องการจัดเก็บและแชร์ไฟล์อิมเมจของระบบปฏิบัติการ (VM Image Service) จะต้องใช้คอมโพเนนต์ใด?",
         choices: [
-          "เปลี่ยนจาก OpEx เป็น CapEx",
-          "เปลี่ยนจาก CapEx เป็น OpEx",
-          "เพิ่ม CapEx เพื่อขยาย Data Center",
-          "ไม่ส่งผลต่อรูปแบบการคิดงบประมาณ"
-        ],
-        answer: 1,
-        explanation: "ลดการลงทุนซื้อเซิร์ฟเวอร์ก้อนโตล่วงหน้า (CapEx - Capital Expenditure) แล้วเปลี่ยนเป็นจ่ายตามการใช้งานจริงเป็นรอบบิล (OpEx - Operational Expenditure)"
-      },
-      {
-        category: "Unit 3: Public Cloud",
-        question: "10. ตามโมเดล Shared Responsibility บน Public Cloud สิ่งใดที่ 'ผู้ให้บริการคลาวด์ (Cloud Provider)' ต้องรับผิดชอบ?",
-        choices: [
-          "การตั้งค่ารหัสผ่านและสิทธิ์การเข้าถึงของผู้ใช้ (IAM)",
-          "การรักษาความปลอดภัยของศูนย์ข้อมูลกายภาพและฮาร์ดแวร์ (Security OF the Cloud)",
-          "การเขียนโปรแกรมและการแก้บั๊กในโค้ดของลูกค้า",
-          "การเข้ารหัสไฟล์ข้อมูลของลูกค้าก่อนอัปโหลด"
-        ],
-        answer: 1,
-        explanation: "Cloud Provider มีหน้าที่รับผิดชอบ Security OF the Cloud (โครงสร้างพื้นฐานกายภาพ, Data Center, เครือข่ายหลัก)"
-      },
-      {
-        category: "Unit 3: Public Cloud",
-        question: "11. ข้อใดต่อไปนี้คือผู้ให้บริการ Public Cloud รายใหญ่ (Top Hyperscalers) ของโลก?",
-        choices: [
-          "AWS, Microsoft Azure, Google Cloud (GCP)",
-          "Facebook, TikTok, Instagram",
-          "Ubuntu, Fedora, CentOS",
-          "Oracle Database, MySQL, PostgreSQL"
+          "Glance",
+          "Cinder",
+          "Horizon",
+          "Heat"
         ],
         answer: 0,
-        explanation: "AWS, Microsoft Azure และ Google Cloud คือ 3 ผู้ให้บริการ Public Cloud รายใหญ่ที่สุดของโลก"
+        explanation: "<strong>ตอบ ก. Glance</strong><br>• <strong>เหตุผล:</strong> Glance ทำหน้าที่เป็น Image Service คอยค้นหา จัดเก็บ และเรียกใช้อิมเมจดิสก์ของ VM (เช่น ไฟล์ .qcow2, .iso, .raw) เพื่อนำไปบูตเครื่อง VM ใหม่"
       },
       {
+        category: "Unit 2: Private Cloud",
+        question: "14. คอมโพเนนต์ใดของ OpenStack ที่ทำหน้าที่เป็น Web-based Dashboard (GUI) ให้ผู้ดูแลระบบคลิกจัดการทรัพยากรผ่านหน้าเว็บได้?",
+        choices: [
+          "Horizon",
+          "Keystone",
+          "Neutron",
+          "Cinder"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. Horizon</strong><br>• <strong>เหตุผล:</strong> Horizon คือหน้ากากกราฟิก (Web Dashboard) ที่เชื่อมต่อกับ API ของโมดูลอื่นๆ เพื่อให้ Admin และผู้ใช้งานสามารถคลิกสั่งการผ่านเบราว์เซอร์ได้อย่างสะดวกสบาย"
+      },
+      {
+        category: "Unit 2: Private Cloud",
+        question: "15. ใน OpenStack คอมโพเนนต์ที่ทำหน้าที่ยืนยันตัวตน (Authentication) จัดการ User, Role และ Token คืออะไร?",
+        choices: [
+          "Keystone",
+          "Neutron",
+          "Swift",
+          "Nova"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. Keystone</strong><br>• <strong>เหตุผล:</strong> Keystone คือ Identity Service ของ OpenStack ทำหน้าที่ตรวจรหัสผ่าน แจกจ่าย Token และกำหนดสิทธิ์ (RBAC) ให้แก่บริการและผู้ใช้งานทั้งหมด"
+      },
+      {
+        category: "Unit 2: Private Cloud",
+        question: "16. คอมโพเนนต์ใดของ OpenStack ที่รับผิดชอบการจัดการ Network, IP Address, Subnet และ Virtual Router?",
+        choices: [
+          "Neutron",
+          "Cinder",
+          "Swift",
+          "Glance"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. Neutron</strong><br>• <strong>เหตุผล:</strong> Neutron คือ Networking Service ของ OpenStack จัดการโครงสร้างเครือข่ายเสมือนทั้งหมด เช่น Software-Defined Networking (SDN), VLAN, Subnets, Floating IPs และ Security Groups"
+      },
+
+      // UNIT 3: Public Cloud & Shared Responsibility
+      {
+        category: "Unit 3: Public Cloud",
+        question: "17. การเปลี่ยนย้ายระบบมาใช้บริการ Public Cloud ช่วยเปลี่ยนรูปแบบงบประมาณขององค์กรอย่างไร?",
+        choices: [
+          "เปลี่ยนจาก OpEx (Operational Expenditure) เป็น CapEx (Capital Expenditure)",
+          "เปลี่ยนจาก CapEx (Capital Expenditure) เป็น OpEx (Operational Expenditure)",
+          "เพิ่ม CapEx เพื่อขยายตึกและเครื่องปรับอากาศ",
+          "ไม่ส่งผลต่อโครงสร้างงบประมาณใดๆ"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. เปลี่ยนจาก CapEx เป็น OpEx</strong><br>• <strong>เหตุผล:</strong> องค์กรไม่ต้องจ่ายเงินก้อนโตซื้อฮาร์ดแวร์ล่วงหน้า (CapEx) แต่เปลี่ยนเป็นจ่ายค่าบริการรายเดือนตามการใช้งานจริง (OpEx แบบ Pay-as-you-go) ทำให้บริหารสภาพคล่องทางการเงินได้ดีกว่า"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "18. ตามโมเดล Shared Responsibility สิ่งใดที่ 'ผู้ให้บริการคลาวด์ (Cloud Provider)' มีหน้าที่ต้องรับผิดชอบโดยตรง?",
+        choices: [
+          "การตั้งค่าสิทธิ์การเข้าถึงของผู้ใช้ (IAM Policies)",
+          "ความปลอดภัยทางกายภาพของศูนย์ข้อมูล เครือข่าย และฮาร์ดแวร์เซิร์ฟเวอร์ (Security OF the Cloud)",
+          "การป้องกันการขโมยรหัสผ่านของพนักงานในองค์กร",
+          "การตรวจแก้บั๊กใน Source Code ของลูกค้า"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. Security OF the Cloud</strong><br>• <strong>เหตุผล:</strong> หลักการ Shared Responsibility คือ Provider ดูแล 'ความปลอดภัยของคลาวด์' (Security OF the Cloud: โครงสร้างกายภาพ, อาคาร, ระบบจ่ายไฟ, ไฮเปอร์ไวเซอร์) ส่วนลูกค้าดูแล 'ความปลอดภัยบนคลาวด์' (Security IN the Cloud: ข้อมูล, การเข้าถึง, ระบบปฏิบัติการ, แอปพลิเคชัน)"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "19. ในโมเดล IaaS บน Public Cloud (เช่น AWS EC2 หรือ Azure VM) ข้อใดคือหน้าที่ความรับผิดชอบของ 'ผู้เช่าใช้งาน (Customer)'?",
+        choices: [
+          "การซ่อมแผงวงจรเมนบอร์ดที่ชำรุด",
+          "การติดตั้งระบบดับเพลิงในศูนย์ข้อมูล",
+          "การติดตั้ง OS Patch, กำหนด Firewall Rules และจัดการสิทธิ์ผู้ใช้งาน",
+          "การเปลี่ยนฮาร์ดดิสก์จริงในตู้เซิร์ฟเวอร์"
+        ],
+        answer: 2,
+        explanation: "<strong>ตอบ ค. ติดตั้ง OS Patch, Firewall Rules และสิทธิ์ผู้ใช้</strong><br>• <strong>เหตุผล:</strong> บน IaaS ลูกค้ามีสิทธิ์ระดับ Root/Administrator ในเครื่อง VM จึงต้องรับผิดชอบการอัปเดตความปลอดภัยของ OS และการเปิด/ปิดพอร์ต Firewall เองทั้งหมด"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "20. ข้อใดต่อไปนี้คือ 3 ยักษ์ใหญ่ผู้ให้บริการ Public Cloud ระดับโลก (Global Hyperscalers)?",
+        choices: [
+          "AWS, Microsoft Azure, Google Cloud Platform (GCP)",
+          "Facebook, TikTok, Instagram",
+          "Ubuntu, Red Hat, Debian",
+          "Intel, AMD, NVIDIA"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. AWS, Azure, GCP</strong><br>• <strong>เหตุผล:</strong> Amazon Web Services (AWS), Microsoft Azure และ Google Cloud เป็น 3 ผู้ให้บริการระบบคลาวด์สาธารณะที่มีส่วนแบ่งการตลาดและโครงข่าย Data Center มากที่สุดในโลก"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "21. คำว่า 'Availability Zone (AZ)' บน Public Cloud มีความหมายตรงกับข้อใด?",
+        choices: [
+          "ประเทศที่มีสำนักงานสาขาของคลาวด์",
+          "ศูนย์ข้อมูล (Data Center) หนึ่งแห่งหรือหลายแห่งที่มีระบบไฟฟ้าและเครือข่ายแยกอิสระจากกันอย่างสิ้นเชิงภายใน Region เดียวกัน",
+          "เวลาทำการของเจ้าหน้าที่ Support",
+          "ความเร็วของสายแลนภายในบ้าน"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. ศูนย์ข้อมูลแยกอิสระภายใน Region</strong><br>• <strong>เหตุผล:</strong> AZ ถูกออกแบบมาเพื่อรองรับ Fault Tolerance หากศูนย์ข้อมูลแห่งหนึ่งไฟดับหรือน้ำท่วม ศูนย์ข้อมูลใน AZ อื่นใน Region เดียวกันจะยังทำงานต่อได้โดยไม่ดับตาม"
+      },
+      {
+        category: "Unit 3: Public Cloud",
+        question: "22. ความสามารถในการขยายระบบรับโหลดที่เพิ่มขึ้นโดยการเพิ่มประสิทธิภาพของเครื่องเดิม (เช่น เพิ่ม CPU/RAM) เรียกว่าอะไร?",
+        choices: [
+          "Vertical Scaling (Scale Up)",
+          "Horizontal Scaling (Scale Out)",
+          "Elastic Pooling",
+          "Burst Balancing"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. Vertical Scaling (Scale Up)</strong><br>• <strong>เหตุผล:</strong><br>• <em>Scale Up (แนวดิ่ง):</em> อัปเกรดเครื่องเดิมให้แรงขึ้น (เพิ่ม CPU, RAM)<br>• <em>Scale Out (แนวราบ):</em> เพิ่มจำนวนเครื่องเซิร์ฟเวอร์เข้ามาช่วยกันแบ่งเบาโหลด (เช่น จาก 2 เครื่องเป็น 10 เครื่อง)"
+      },
+
+      // UNIT 4: Virtualization
+      {
         category: "Unit 4: Virtualization",
-        question: "12. ซอฟต์แวร์หรือเฟิร์มแวร์ที่ทำหน้าที่เป็นตัวกลางในการจำลองฮาร์ดแวร์และรัน Virtual Machine เรียกว่าอะไร?",
+        question: "23. ซอฟต์แวร์หรือเลเยอร์ที่ทำหน้าที่จำลองฮาร์ดแวร์เสมือนและบริหารจัดการ Virtual Machine เรียกว่าอะไร?",
         choices: [
           "Hypervisor (Virtual Machine Monitor)",
           "Container Engine",
-          "BIOS / UEFI",
-          "Compiler"
+          "Device Driver",
+          "Operating Shell"
         ],
         answer: 0,
-        explanation: "Hypervisor หรือ VMM เป็นเลเยอร์ที่คอยจำลองฮาร์ดแวร์และควบคุมการทำงานของ Virtual Machine ต่างๆ"
+        explanation: "<strong>ตอบ ก. Hypervisor</strong><br>• <strong>เหตุผล:</strong> Hypervisor (หรือ VMM) คือซอฟต์แวร์ตัวกลางที่แปลงฮาร์ดแวร์จริงให้กลายเป็นทรัพยากรเสมือน และจัดสรรให้แต่ละ VM ทำงานแยกจากกันได้อย่างเป็นอิสระ"
       },
       {
         category: "Unit 4: Virtualization",
-        question: "13. Hypervisor ประเภท Type 1 (Bare-Metal Hypervisor) มีลักษณะการทำงานที่เด่นชัดคือข้อใด?",
+        question: "24. Hypervisor ประเภท Type 1 (Bare-Metal Hypervisor) มีลักษณะการติดตั้งและการทำงานอย่างไร?",
         choices: [
-          "ติดตั้งและรันอยู่บน Host OS ทั่วไปเช่น Windows 11",
-          "ติดตั้งและทำงานลงบนฮาร์ดแวร์ของเครื่องเซิร์ฟเวอร์โดยตรงโดยไม่ต้องมี Host OS",
-          "ทำงานผ่านเว็บเบราว์เซอร์เท่านั้น",
-          "ใช้งานได้เฉพาะบนสมาร์ตโฟน"
+          "ติดตั้งลงบนระบบปฏิบัติการ Host OS เช่น Windows 11",
+          "ติดตั้งและทำงานอยู่บนฮาร์ดแวร์จริงโดยตรง โดยไม่ต้องมี Host OS ขั้นกลาง",
+          "ทำงานอยู่บน Web Browser",
+          "ติดตั้งผ่านแอปพลิเคชันมือถือเท่านั้น"
         ],
         answer: 1,
-        explanation: "Type 1 เช่น VMware ESXi, Proxmox VE, KVM ทำงานตรงบนฮาร์ดแวร์โดยตรง จึงมี Overhead ต่ำและมีประสิทธิภาพสูงสุด"
+        explanation: "<strong>ตอบ ข. ติดตั้งลงบนฮาร์ดแวร์จริงโดยตรง</strong><br>• <strong>เหตุผล:</strong> Type 1 (เช่น VMware ESXi, Proxmox VE, KVM) ทำงานลงบนฮาร์ดแวร์ตรงๆ จึงไม่มี Overhead ของ OS มาแย่งทรัพยากร เหมาะสำหรับเซิร์ฟเวอร์ในศูนย์ข้อมูล Data Center"
       },
       {
         category: "Unit 4: Virtualization",
-        question: "14. โปรแกรมใดต่อไปนี้จัดเป็นตัวอย่างของ Type 2 Hypervisor (Hosted Hypervisor)?",
+        question: "25. ข้อใดเป็นตัวอย่างของ Type 2 Hypervisor (Hosted Hypervisor)?",
         choices: [
-          "VMware Workstation และ Oracle VirtualBox",
           "VMware ESXi",
-          "Microsoft Hyper-V Server",
-          "Xen Project"
+          "Microsoft Hyper-V Server Standalone",
+          "Oracle VM VirtualBox และ VMware Workstation",
+          "KVM Bare-metal"
         ],
-        answer: 0,
-        explanation: "VMware Workstation และ VirtualBox ต้องติดตั้งลงบนระบบปฏิบัติการ (Host OS) ทั่วไป จึงจัดเป็น Type 2 Hypervisor"
+        answer: 2,
+        explanation: "<strong>ตอบ ค. VirtualBox และ VMware Workstation</strong><br>• <strong>เหตุผล:</strong> Type 2 เป็นโปรแกรมที่ต้องติดตั้งอยู่บนระบบปฏิบัติการทั่วไป (Host OS เช่น Windows หรือ macOS) เหมาะสำหรับใช้ทดสอบหรือจำลองระบบบนคอมพิวเตอร์ส่วนบุคคล"
       },
       {
         category: "Unit 4: Virtualization",
-        question: "15. ความแตกต่างสำคัญที่สุดระหว่าง Virtual Machine (VM) กับ Container คือข้อใด?",
+        question: "26. ข้อใดคือความแตกต่างสำคัญระหว่าง Virtual Machine (VM) กับ Container?",
         choices: [
-          "VM ทำงานเร็วกว่า Container เสมอ",
-          "VM มี Guest OS แยกสมบูรณ์ในตัวเอง ส่วน Container แชร์ Kernel ของระบบปฏิบัติการโฮสต์",
-          "Container กินพื้นที่เก็บข้อมูลมากกว่า VM เสมอ",
-          "Container ไม่สามารถรันแอปพลิเคชันได้"
+          "VM มีขนาดเล็กกว่า Container เสมอ",
+          "VM บูตเร็วกว่า Container",
+          "VM จำลองระดับฮาร์ดแวร์และมี Guest OS ตัวเต็ม ส่วน Container จำลองระดับ OS และแชร์ Kernel ร่วมกับเครื่องโฮสต์",
+          "Container ไม่สามารถรันโปรแกรมภาษา Python ได้"
+        ],
+        answer: 2,
+        explanation: "<strong>ตอบ ค. VM มี Guest OS ตัวเต็ม ส่วน Container แชร์ Kernel</strong><br>• <strong>เหตุผล:</strong> Container ไม่ต้องจำลองฮาร์ดแวร์และไม่ต้องบูต Guest OS ใหม่ แต่ใช้การแยก Process และแชร์ Kernel ทำให้ Container มีขนาดเล็กกว่า (ระดับ MB เทียบกับ GB ของ VM) และเริ่มทำงานได้ในเวลาเพียงเสี้ยววินาที"
+      },
+      {
+        category: "Unit 4: Virtualization",
+        question: "27. ระบบปฏิบัติการที่ติดตั้งและรันอยู่ภายใน Virtual Machine มีชื่อเรียกว่าอะไร?",
+        choices: [
+          "Host OS",
+          "Guest OS",
+          "Master OS",
+          "Root OS"
         ],
         answer: 1,
-        explanation: "Container เป็นการจำลองระดับ OS-level (แชร์ Kernel ร่วมกัน) จึงมีขนาดเบาและบูตเร็วกว่า VM ที่ต้องมี Guest OS ตัวเต็ม"
+        explanation: "<strong>ตอบ ข. Guest OS</strong><br>• <strong>เหตุผล:</strong> OS หลักของเครื่องคอมพิวเตอร์จริงเรียกว่า Host OS ส่วน OS ที่ถูกจำลองขึ้นมาใน VM เรียกว่า Guest OS"
       },
+      {
+        category: "Unit 4: Virtualization",
+        question: "28. เทคโนโลยีการย้าย Virtual Machine จากเซิร์ฟเวอร์เครื่องหนึ่งไปยังอีกเครื่องหนึ่งขณะที่ VM กำลังทำงานอยู่โดยระบบไม่ดับ เรียกว่าอะไร?",
+        choices: [
+          "Live Migration (เช่น VMware vMotion)",
+          "Cold Copy",
+          "Data Dumping",
+          "Disk Partitioning"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. Live Migration</strong><br>• <strong>เหตุผล:</strong> Live Migration คือการคัดลอก Memory สถานะ และการประมวลผลของ VM ข้าม Physical Host ไปยังอีกเครื่องหนึ่งแบบเรียลไทม์ ทำให้สามารถบำรุงรักษาฮาร์ดแวร์ได้โดยไม่มี Downtime"
+      },
+      {
+        category: "Unit 4: Virtualization",
+        question: "29. การ 'Snapshot' ของ Virtual Machine มีประโยชน์หลักอย่างไร?",
+        choices: [
+          "ช่วยเพิ่มความเร็วของ CPU เป็นสองเท่า",
+          "บันทึกสถานะของ VM ณ ช่วงเวลาหนึ่ง (ดิสก์, หน่วยความจำ) เพื่อให้สามารถย้อนกลับ (Rollback) มาจุดเดิมได้เมื่อเกิดข้อผิดพลาด",
+          "ลบระบบปฏิบัติการทิ้งเพื่อล้างไวรัส",
+          "แปลงภาษาของโปรแกรมให้เป็นภาษาไทย"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. บันทึกสถานะเพื่อย้อนกลับได้</strong><br>• <strong>เหตุผล:</strong> Snapshot นิยมทำก่อนการอัปเกรดระบบหรือติดตั้งแพตช์ หากเกิดข้อผิดพลาดหรือระบบพัง สามารถกดย้อนกลับ (Revert) ไปยังสถานะที่ Snapshot ไว้ได้อย่างรวดเร็ว"
+      },
+
+      // UNIT 5: Docker & Container Technology
       {
         category: "Unit 5: Docker",
-        question: "16. คำสั่งใดใน Docker ใช้สำหรับสร้าง (Create) และสั่งเริ่มต้น (Start) Container ในขั้นตอนเดียว?",
+        question: "30. คำสั่งใดใน Docker ใช้สำหรับสร้าง (Create) และสั่งให้ Container เริ่มทำงาน (Start) ในขั้นตอนเดียว?",
         choices: [
           "docker build",
           "docker run",
-          "docker create",
-          "docker exec"
+          "docker compile",
+          "docker init"
         ],
         answer: 1,
-        explanation: "docker run จะทำหน้าที่ดึง Image (หากยังไม่มี), สร้าง Container ใหม่ และเริ่มรันแอปพลิเคชันทันที"
+        explanation: "<strong>ตอบ ข. docker run</strong><br>• <strong>เหตุผล:</strong> `docker run` คือคำสั่งอเนกประสงค์ที่รวมการดึง Image (Pull), การสร้าง Container (Create) และการสั่งเปิดใช้งาน (Start) เข้าไว้ด้วยกันในคำสั่งเดียว"
       },
       {
         category: "Unit 5: Docker",
-        question: "17. ไฟล์ข้อความ (Text file) ที่รวบรวมชุดคำสั่งทีละบรรทัดสำหรับใช้ 'สร้าง Docker Image' เรียกว่าอะไร?",
+        question: "31. ไฟล์ข้อความ (Text File) ที่รวบรวมคำสั่งทีละบรรทัดเพื่อใช้เป็นพิมพ์เขียวสำหรับสั่ง 'สร้าง Docker Image' เรียกว่าอะไร?",
         choices: [
           "Dockerfile",
-          "Docker Container",
+          "Docker.config",
           "docker-compose.yml",
-          "Imagefile"
+          "Manifest.xml"
         ],
         answer: 0,
-        explanation: "Dockerfile คือไฟล์สคริปต์คำสั่ง (เช่น FROM, RUN, COPY, CMD) ที่ใช้เป็นพิมพ์เขียวในการสั่ง docker build เพื่อสร้าง Image"
+        explanation: "<strong>ตอบ ก. Dockerfile</strong><br>• <strong>เหตุผล:</strong> Dockerfile คือไฟล์สคริปต์ที่กำหนดขั้นตอน เช่น ใช้ Base image อะไร (`FROM`), คัดลอกไฟล์ใดเข้าไป (`COPY`), และรันคำสั่งอะไร (`RUN`, `CMD`) เพื่อสร้างออกมาเป็น Docker Image"
       },
       {
         category: "Unit 5: Docker",
-        question: "18. คำสั่งใดใช้สำหรับตรวจสอบรายการ Container ทั้งหมด (ทั้งที่กำลังรันอยู่และที่หยุดทำงานไปแล้ว)?",
+        question: "32. คำสั่งใดใช้สำหรับสร้าง Docker Image จากไฟล์ Dockerfile?",
+        choices: [
+          "docker run",
+          "docker build",
+          "docker create",
+          "docker compile"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. docker build</strong><br>• <strong>เหตุผล:</strong> คำสั่ง `docker build` (เช่น `docker build -t myapp .`) จะอ่านคำสั่งใน Dockerfile แล้วคอมไพล์ออกมาเป็น Image ในเครื่อง"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "33. คำสั่งใดใช้สำหรับตรวจสอบรายการ Container ทั้งหมด (ทั้งที่กำลังรันอยู่และที่หยุดทำงานไปแล้ว)?",
         choices: [
           "docker ps",
           "docker ps -a",
           "docker images",
-          "docker list"
+          "docker status"
         ],
         answer: 1,
-        explanation: "คำสั่ง docker ps จะแสดงเฉพาะตัวที่รันอยู่ หากต้องการดูทั้งหมด (All) ต้องระบุพารามิเตอร์ -a"
+        explanation: "<strong>ตอบ ข. docker ps -a</strong><br>• <strong>เหตุผล:</strong> หากใช้ `docker ps` จะเห็นเฉพาะตัวที่กำลังรันอยู่ หากต้องการดู Container ทั้งหมด (All) แม้แต่ตัวที่ Exited ไปแล้ว ต้องใส่แฟล็ก `-a`"
       },
       {
         category: "Unit 5: Docker",
-        question: "19. คำสั่งใดใช้สำหรับ 'ลบ Docker Image' ออกจากเครื่อง?",
+        question: "34. คำสั่งใดใช้สำหรับ 'ลบ Docker Image' ออกจากเครื่อง?",
         choices: [
           "docker rm",
           "docker rmi",
           "docker erase",
-          "docker drop"
+          "docker clear"
         ],
         answer: 1,
-        explanation: "docker rmi (Remove Image) ใช้สำหรับลบ Image ส่วน docker rm ใช้สำหรับลบ Container"
+        explanation: "<strong>ตอบ ข. docker rmi</strong><br>• <strong>เหตุผล (จำให้แม่น!):</strong><br>• `docker rm` = ลบ <strong>Container</strong><br>• `docker rmi` (remove image) = ลบ <strong>Image</strong>"
       },
       {
         category: "Unit 5: Docker",
-        question: "20. แหล่งจัดเก็บและแบ่งปัน Docker Image สาธารณะที่ใหญ่ที่สุดคือที่ใด?",
+        question: "35. หากต้องการรัน Container แบบอยู่เบื้องหลัง (Background / Detached Mode) ไม่ให้บล็อกหน้าจอ Terminal ต้องใช้พารามิเตอร์ใด?",
+        choices: [
+          "-d",
+          "-b",
+          "-p",
+          "-v"
+        ],
+        answer: 0,
+        explanation: "<strong>ตอบ ก. -d</strong><br>• <strong>เหตุผล:</strong> `-d` ย่อมาจาก Detached mode จะสั่งให้ Container รันอยู่เบื้องหลัง และคืนหน้าจอ Terminal ให้เราสั่งงานอย่างอื่นต่อได้ทันที"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "36. ในคำสั่ง `docker run -p 8080:80 nginx` ตัวเลข `8080:80` มีความหมายอย่างไร?",
+        choices: [
+          "จำกัดขนาดความจุแรมที่ 8080 MB และ CPU 80%",
+          "เชื่อมต่อพอร์ต 8080 ของเครื่องโฮสต์ เข้ากับพอร์ต 80 ของ Container",
+          "สร้าง Container จำนวน 8080 ตัว",
+          "ตั้งเวลารัน 8080 วินาที"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. เชื่อมพอร์ต 8080 บนโฮสต์ กับพอร์ต 80 ในคอนเทนเนอร์</strong><br>• <strong>เหตุผล:</strong> รูปแบบพอร์ตคือ `-p <Host_Port>:<Container_Port>` ทำให้เมื่อเราเข้าเบราว์เซอร์ผ่าน `http://localhost:8080` จะถูกส่งต่อไปยังเว็บเซิร์ฟเวอร์พอร์ต 80 ข้างใน Container"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "37. คำสั่งพื้นฐานคำสั่งแรกสุดที่ต้องระบุในไฟล์ Dockerfile เพื่อกำหนด Base Image คือคำสั่งใด?",
+        choices: [
+          "START",
+          "FROM",
+          "BASE",
+          "INIT"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. FROM</strong><br>• <strong>เหตุผล:</strong> คำสั่ง `FROM` (เช่น `FROM ubuntu:22.04` หรือ `FROM node:18-alpine`) เป็นคำสั่งแรกเสมอที่กำหนดว่าเราจะนำ Image ตัวใดมาเป็นรากฐานในการสร้างต่อยอด"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "38. แหล่งเก็บและแจกจ่าย Docker Image สาธารณะอย่างเป็นทางการที่ใหญ่ที่สุดในโลกคือที่ใด?",
         choices: [
           "Docker Hub",
           "GitHub Pages",
-          "Google Drive",
-          "NPM Registry"
+          "SourceForge",
+          "Bitbucket"
         ],
         answer: 0,
-        explanation: "Docker Hub เป็น Official Public Registry ที่ใช้ค้นหา ดาวน์โหลด (pull) และแชร์ Docker Image ที่ใหญ่ที่สุดในโลก"
+        explanation: "<strong>ตอบ ก. Docker Hub</strong><br>• <strong>เหตุผล:</strong> Docker Hub (hub.docker.com) คือ Public Registry หลักที่รวบรวม Official Images นับล้านรายการให้ทุกคนดาวน์โหลด (Pull) มาใช้งานฟรี"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "39. หากต้องการเปิดเข้าสู่ Terminal ด้านในของ Container ที่กำลังรันอยู่เพื่อสั่งงานแบบ Interactive ต้องใช้คำสั่งใด?",
+        choices: [
+          "docker enter <container_id>",
+          "docker exec -it <container_id> sh",
+          "docker open <container_id>",
+          "docker ssh <container_id>"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. docker exec -it &lt;container_id&gt; sh</strong><br>• <strong>เหตุผล:</strong> `docker exec` ใช้รันคำสั่งข้างใน Container ที่กำลังทำงานอยู่ โดย `-i` (Interactive) และ `-t` (TTY) จะเปิดหน้าต่าง Terminal เสมือนให้เราพิมพ์คำสั่งควบคุมได้โดยตรง"
+      },
+      {
+        category: "Unit 5: Docker",
+        question: "40. เครื่องมือใดของ Docker ที่ออกแบบมาเพื่อบริหารจัดการแอปพลิเคชันที่ต้องทำงานร่วมกันหลายๆ Container (Multi-container) ผ่านไฟล์คอนฟิก `.yml`?",
+        choices: [
+          "Docker Swarm",
+          "Docker Compose",
+          "Docker Machine",
+          "Docker Kube"
+        ],
+        answer: 1,
+        explanation: "<strong>ตอบ ข. Docker Compose</strong><br>• <strong>เหตุผล:</strong> Docker Compose ช่วยให้เรานิยามบริการทั้งหมด (เช่น Web App + Database + Redis Cache) ลงในไฟล์ `docker-compose.yml` และสั่งสตาร์ตทั้งระบบพร้อมกันได้ด้วยคำสั่งเดียว: `docker-compose up`"
       }
     ];
 
+    let currentQuestions = [...allQuestions];
     let currentIdx = 0;
     let score = 0;
     let answered = false;
 
+    // Elements
     const viewStart = document.getElementById('view-start');
     const viewQuiz = document.getElementById('view-quiz');
     const viewResult = document.getElementById('view-result');
+    const viewStudy = document.getElementById('view-study');
 
     const btnStart = document.getElementById('btn-start');
+    const btnOpenStudy = document.getElementById('btn-open-study');
+    const navModeStudy = document.getElementById('nav-mode-study');
+    const btnBackToQuiz = document.getElementById('btn-back-to-quiz');
     const btnNext = document.getElementById('btn-next');
     const btnRestart = document.getElementById('btn-restart');
     const btnShare = document.getElementById('btn-share');
     const copyToast = document.getElementById('copy-toast');
 
     const qNumEl = document.getElementById('current-q-num');
+    const totalQNumEl = document.getElementById('total-q-num');
     const progressBar = document.getElementById('progress-bar');
     const qCategory = document.getElementById('question-category');
     const scoreCounter = document.getElementById('score-counter');
@@ -422,26 +733,42 @@
     const finalPercent = document.getElementById('final-percent');
     const finalMessage = document.getElementById('final-message');
     const resultEmoji = document.getElementById('result-emoji');
+    const studyList = document.getElementById('study-list');
 
+    // Navigation events
     btnStart.addEventListener('click', () => {
+      const mode = document.querySelector('input[name="quiz-mode"]:checked').value;
+      if (mode === 'random20') {
+        const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+        currentQuestions = shuffled.slice(0, 20);
+      } else {
+        currentQuestions = [...allQuestions];
+      }
+      totalQNumEl.textContent = currentQuestions.length;
       viewStart.classList.add('hidden');
+      viewStudy.classList.add('hidden');
       viewQuiz.classList.remove('hidden');
       currentIdx = 0;
       score = 0;
       loadQuestion();
+    });
+
+    btnOpenStudy.addEventListener('click', showStudyMode);
+    navModeStudy.addEventListener('click', showStudyMode);
+
+    btnBackToQuiz.addEventListener('click', () => {
+      viewStudy.classList.add('hidden');
+      viewStart.classList.remove('hidden');
     });
 
     btnRestart.addEventListener('click', () => {
       viewResult.classList.add('hidden');
-      viewQuiz.classList.remove('hidden');
-      currentIdx = 0;
-      score = 0;
-      loadQuestion();
+      viewStart.classList.remove('hidden');
     });
 
     btnNext.addEventListener('click', () => {
       currentIdx++;
-      if (currentIdx < questions.length) {
+      if (currentIdx < currentQuestions.length) {
         loadQuestion();
       } else {
         showResult();
@@ -460,9 +787,9 @@
       answered = false;
       explanationBox.classList.add('hidden');
       
-      const q = questions[currentIdx];
+      const q = currentQuestions[currentIdx];
       qNumEl.textContent = currentIdx + 1;
-      const progressPercent = ((currentIdx) / questions.length) * 100;
+      const progressPercent = ((currentIdx) / currentQuestions.length) * 100;
       progressBar.style.width = `${progressPercent}%`;
 
       qCategory.textContent = q.category;
@@ -490,7 +817,7 @@
       if (answered) return;
       answered = true;
 
-      const q = questions[currentIdx];
+      const q = currentQuestions[currentIdx];
       const isCorrect = selectedIdx === q.answer;
       const allButtons = choicesContainer.querySelectorAll('.choice-card');
 
@@ -499,14 +826,12 @@
         b.classList.add('cursor-default');
         
         if (idx === q.answer) {
-          // Highlight correct answer in green
           b.classList.remove('bg-slate-800/90', 'border-slate-700/80');
           b.classList.add('bg-emerald-950/80', 'border-emerald-500', 'text-emerald-200');
           const badge = b.querySelector('div');
           badge.className = "w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center flex-shrink-0 text-sm";
           badge.textContent = "✓";
         } else if (idx === selectedIdx && !isCorrect) {
-          // Highlight wrong picked answer in red
           b.classList.remove('bg-slate-800/90', 'border-slate-700/80');
           b.classList.add('bg-rose-950/80', 'border-rose-500', 'text-rose-200');
           const badge = b.querySelector('div');
@@ -521,16 +846,16 @@
         score++;
         scoreCounter.textContent = `คะแนน: ${score}`;
         explanationTitle.className = "flex items-center space-x-2 font-bold text-sm text-emerald-400";
-        explanationTitle.innerHTML = `<span>🎉 ถูกต้อง! เก่งมาก</span>`;
+        explanationTitle.innerHTML = `<span>🎉 ถูกต้อง! ยอดเยี่ยม</span>`;
       } else {
         explanationTitle.className = "flex items-center space-x-2 font-bold text-sm text-rose-400";
-        explanationTitle.innerHTML = `<span>❌ ยังไม่ถูก (คำตอบที่ถูกคือข้อ ${['ก', 'ข', 'ค', 'ง'][q.answer]})</span>`;
+        explanationTitle.innerHTML = `<span>❌ ยังไม่ถูก (คำตอบที่ถูกต้องคือข้อ ${['ก', 'ข', 'ค', 'ง'][q.answer]})</span>`;
       }
 
-      explanationText.textContent = q.explanation;
+      explanationText.innerHTML = q.explanation;
       explanationBox.classList.remove('hidden');
 
-      if (currentIdx === questions.length - 1) {
+      if (currentIdx === currentQuestions.length - 1) {
         btnNext.innerHTML = `<span>ดูผลสรุปคะแนน</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
       } else {
         btnNext.innerHTML = `<span>ข้อถัดไป</span> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>`;
@@ -542,8 +867,8 @@
       viewResult.classList.remove('hidden');
       progressBar.style.width = '100%';
 
-      finalScore.textContent = `${score} / ${questions.length}`;
-      const percent = Math.round((score / questions.length) * 100);
+      finalScore.textContent = `${score} / ${currentQuestions.length}`;
+      const percent = Math.round((score / currentQuestions.length) * 100);
       finalPercent.textContent = `${percent}%`;
 
       if (percent >= 80) {
@@ -551,7 +876,7 @@
         finalMessage.className = "mt-4 text-sm font-semibold text-emerald-400 bg-emerald-950/50 py-2.5 px-3 rounded-lg border border-emerald-800";
         finalMessage.textContent = "สุดยอดมาก! เตรียมตัวพร้อมสอบเต็มร้อยแน่นอน 🌟";
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
         }
       } else if (percent >= 50) {
         resultEmoji.textContent = "👍";
@@ -563,6 +888,68 @@
         finalMessage.textContent = "สู้ๆ ลองใหม่อีกรอบ จำจุดสำคัญแล้วทำใหม่ได้เลย!";
       }
     }
+
+    function showStudyMode() {
+      viewStart.classList.add('hidden');
+      viewQuiz.classList.add('hidden');
+      viewResult.classList.add('hidden');
+      viewStudy.classList.remove('hidden');
+      renderStudyList('all');
+    }
+
+    function renderStudyList(filter) {
+      studyList.innerHTML = '';
+      const letters = ['ก', 'ข', 'ค', 'ง'];
+
+      const filtered = allQuestions.filter(q => {
+        if (filter === 'all') return true;
+        return q.category.includes(filter);
+      });
+
+      filtered.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = "p-5 rounded-2xl bg-slate-800/80 border border-slate-700/80 space-y-3";
+        
+        let choicesHtml = q.choices.map((c, cIdx) => {
+          const isCorrect = cIdx === q.answer;
+          return `
+            <div class="text-xs sm:text-sm p-2.5 rounded-lg flex items-center space-x-2 ${isCorrect ? 'bg-emerald-950/70 border border-emerald-500/80 text-emerald-200 font-semibold' : 'bg-slate-900/60 text-slate-300'}">
+              <span class="w-6 h-6 rounded flex items-center justify-center text-xs font-bold ${isCorrect ? 'bg-emerald-600 text-white' : 'bg-slate-700 text-slate-300'}">
+                ${letters[cIdx]}
+              </span>
+              <span>${c}</span>
+              ${isCorrect ? '<span class="ml-auto text-emerald-400 text-xs">✓ คำตอบที่ถูก</span>' : ''}
+            </div>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between text-xs">
+            <span class="bg-indigo-950 text-indigo-300 px-2 py-0.5 rounded font-medium border border-indigo-800">${q.category}</span>
+          </div>
+          <h4 class="font-bold text-white text-sm sm:text-base leading-snug">${q.question}</h4>
+          <div class="space-y-1.5 pt-1">${choicesHtml}</div>
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/60 text-xs text-slate-300 space-y-1">
+            <div class="text-cyan-400 font-semibold flex items-center space-x-1">
+              <span>💡 คำอธิบายเฉลยและจุดจำ:</span>
+            </div>
+            <div>${q.explanation}</div>
+          </div>
+        `;
+        studyList.appendChild(card);
+      });
+    }
+
+    // Filter clicks in study mode
+    document.querySelectorAll('#study-filters .filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('#study-filters .filter-btn').forEach(b => {
+          b.className = "filter-btn px-3 py-1 text-xs rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium";
+        });
+        e.target.className = "filter-btn active px-3 py-1 text-xs rounded-full bg-indigo-600 text-white font-medium";
+        renderStudyList(e.target.getAttribute('data-filter'));
+      });
+    });
   </script>
 </body>
 </html>
